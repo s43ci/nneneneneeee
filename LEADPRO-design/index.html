@@ -26,8 +26,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:#E9DDD8}
 body{font-family:var(--sans);color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:13.5px;line-height:1.75;font-kerning:normal}
-.page{width:297mm;height:210mm;position:relative;overflow:hidden;background:#fff;margin:24px auto;box-shadow:0 10px 40px rgba(120,40,30,.18);page-break-after:always;break-after:page}
-@media print{html,body{background:#fff}.page{margin:0;box-shadow:none}}
+.page{width:297mm;height:210mm;position:relative;overflow:hidden;background:#fff;margin:24px auto;page-break-after:always;break-after:page}
+@media print{html,body{background:#fff}.page{margin:0;}}
 .sw{font-feature-settings:"swsh" 1,"salt" 1}
 .en{font-family:var(--sans);direction:ltr;unicode-bidi:isolate}
 b,strong{font-weight:700}
@@ -61,11 +61,11 @@ footer.f .pn{display:inline-flex;align-items:center;justify-content:center;min-w
 .redcard{background:var(--grad);color:#fff;border-radius:24px;padding:24px;position:relative;overflow:hidden}
 .redcard::after{content:"";position:absolute;inset:0;background:url(img/waves.svg) center/cover;opacity:.13;pointer-events:none}
 .redcard>*{position:relative;z-index:1}
-.ico{width:46px;height:46px;border-radius:14px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -8px rgba(236,70,50,.7);flex:none}
+.ico{width:46px;height:46px;border-radius:14px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex:none}
 .ico svg{width:23px;height:23px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.ico.lt{background:#FFE6DC;box-shadow:none}
+.ico.lt{background:#FFE6DC;}
 .ico.lt svg{stroke:var(--red)}
-.ico.wh{background:rgba(255,255,255,.2);box-shadow:none;border:1px solid rgba(255,255,255,.35)}
+.ico.wh{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35)}
 .num{font-family:var(--sans);font-weight:900;font-size:13px;color:var(--red);letter-spacing:.06em}
 .tag{display:inline-block;font-size:10.5px;font-weight:700;color:var(--red);background:#FFE6DC;border-radius:20px;padding:1px 12px}
 .on-red .tag,.tag.w{color:var(--red);background:#fff}
@@ -144,7 +144,7 @@ table.t tr:last-child td{border-bottom:0}
 <section class="page">
   <div class="full-red"></div>
   <div class="photo" style="left:0;top:0;bottom:0;width:430px;background-image:url(img/cover.jpg);border-top-right-radius:0;border-bottom-right-radius:220px;z-index:2"></div>
-  <div style="position:absolute;left:330px;bottom:56px;z-index:3;width:190px;height:190px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 30px 60px -20px rgba(120,20,10,.45)">
+  <div style="position:absolute;left:330px;bottom:56px;z-index:3;width:190px;height:190px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;border:8px solid #FFD3BC">
     <img src="img/logo-dark.png" style="width:150px">
   </div>
   <div style="position:absolute;right:64px;top:56px;left:500px;z-index:3;color:#fff" class="on-red">
@@ -418,7 +418,7 @@ table.t tr:last-child td{border-bottom:0}
       <div class="card rg"><div class="rn en">3</div><div><div class="ct">ثبّت مقعدك</div><div class="cd">يُثبَّت المقعد بعد دفع العربون أو الرسوم وفق سياسة مكتوبة.</div></div></div>
     </div>
   </div>
-  <style>.rg{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:14px;padding:22px 24px}.rg .rn{width:46px!important;height:46px!important;font-size:20px!important}.rg .rn{flex:none;width:38px;height:38px;border-radius:50%;background:var(--grad);color:#fff;font-weight:900;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 16px -8px rgba(236,70,50,.8)}.rg .cd{margin-top:2px}</style>
+  <style>.rg{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:14px;padding:22px 24px}.rg .rn{width:46px!important;height:46px!important;font-size:20px!important}.rg .rn{flex:none;width:38px;height:38px;border-radius:50%;background:var(--grad);color:#fff;font-weight:900;font-size:17px;display:flex;align-items:center;justify-content:center;}.rg .cd{margin-top:2px}</style>
   <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">11</span></footer>
 </section>
 
@@ -630,7 +630,7 @@ table.t tr:last-child td{border-bottom:0}
       <div style="font-family:var(--disp);font-size:24px;font-weight:700;line-height:1.5">معاً نحو قيادات أكثر كفاءة<br><span style="color:#FFE1CF">ومؤسسا<span class="sw">ت</span> أكثر تميّزاً</span></div>
     </div>
   </div>
-  <style>.cta{background:#fff;color:var(--ink);border-radius:22px;padding:18px 20px;position:relative;box-shadow:0 20px 40px -24px rgba(120,20,10,.6)}.cta .ico{position:absolute;left:18px;top:18px;width:40px;height:40px;border-radius:13px}.cta .ico svg{width:20px;height:20px}.cl{display:flex;align-items:center;gap:10px}.cl span{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;flex:none}.cl svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.cl b{font-weight:700}</style>
+  <style>.cta{background:#fff;color:var(--ink);border-radius:22px;padding:18px 20px;position:relative;}.cta .ico{position:absolute;left:18px;top:18px;width:40px;height:40px;border-radius:13px}.cta .ico svg{width:20px;height:20px}.cl{display:flex;align-items:center;gap:10px}.cl span{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;flex:none}.cl svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.cl b{font-weight:700}</style>
 </section>
 
 </body>
