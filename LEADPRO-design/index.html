@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEADPRO — عرض البرنامج</title>
+<style>
+@font-face{font-family:"Thmanyah Sans";src:url(fonts/thmanyahsans-Light.woff2) format("woff2");font-weight:300}
+@font-face{font-family:"Thmanyah Sans";src:url(fonts/thmanyahsans-Regular.woff2) format("woff2");font-weight:400}
+@font-face{font-family:"Thmanyah Sans";src:url(fonts/thmanyahsans-Medium.woff2) format("woff2");font-weight:500}
+@font-face{font-family:"Thmanyah Sans";src:url(fonts/thmanyahsans-Bold.woff2) format("woff2");font-weight:700}
+@font-face{font-family:"Thmanyah Sans";src:url(fonts/thmanyahsans-Black.woff2) format("woff2");font-weight:900}
+@font-face{font-family:"Thmanyah Display";src:url(fonts/thmanyahserifdisplay-Medium.woff2) format("woff2");font-weight:500}
+@font-face{font-family:"Thmanyah Display";src:url(fonts/thmanyahserifdisplay-Bold.woff2) format("woff2");font-weight:700}
+@font-face{font-family:"Thmanyah Display";src:url(fonts/thmanyahserifdisplay-Black.woff2) format("woff2");font-weight:900}
+
+:root{
+  --red:#EC4632; --red2:#F45B3F; --coral:#FF7A59; --peach:#FFB38A; --apricot:#FFD3BC;
+  --blush:#FFF4EF; --blush2:#FFE9E0; --line:#F6D9CE;
+  --ink:#2B1715; --ink2:#4A2F2B; --muted:#86655F;
+  --grad:linear-gradient(135deg,#E8372A 0%,#F2513A 45%,#FF7E58 100%);
+  --grad-soft:linear-gradient(135deg,#FFF1EA 0%,#FFE3D6 100%);
+  --sans:"Thmanyah Sans",sans-serif; --disp:"Thmanyah Display","Thmanyah Sans",serif;
+}
+@page{size:297mm 210mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#E9DDD8}
+body{font-family:var(--sans);color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:13.5px;line-height:1.75;font-kerning:normal}
+.page{width:297mm;height:210mm;position:relative;overflow:hidden;background:#fff;margin:24px auto;box-shadow:0 10px 40px rgba(120,40,30,.18);page-break-after:always;break-after:page}
+@media print{html,body{background:#fff}.page{margin:0;box-shadow:none}}
+.sw{font-feature-settings:"swsh" 1,"salt" 1}
+.en{font-family:var(--sans);direction:ltr;unicode-bidi:isolate}
+b,strong{font-weight:700}
+
+/* ---------- Common content-page frame ---------- */
+.inner{position:absolute;inset:46px 56px 66px 56px;display:flex;flex-direction:column}
+.inner>.eyebrow{align-self:flex-start}
+.g{flex:1;min-height:0}
+.col{display:flex;flex-direction:column}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:10.5px;letter-spacing:.24em;font-weight:700;color:var(--red);text-transform:uppercase;direction:ltr}
+.eyebrow::before{content:"";width:26px;height:3px;border-radius:3px;background:var(--grad)}
+.h1{font-family:var(--disp);font-weight:700;font-size:42px;line-height:1.25;color:var(--ink);margin-top:6px}
+.h1 .hl{color:var(--red)}
+.lead{font-size:15px;color:var(--ink2);line-height:1.85;font-weight:400}
+.corner{position:absolute;top:0;left:0;width:210px;height:150px;background:var(--grad);border-bottom-right-radius:120px;overflow:hidden}
+.corner::after,.waves::after{content:"";position:absolute;inset:0;background:url(img/waves.svg) center/cover;opacity:.16}
+.corner img{position:absolute;top:34px;left:34px;width:118px;filter:none}
+.waves{position:relative;overflow:hidden}
+.waves>*{position:relative;z-index:1}
+
+footer.f{position:absolute;bottom:20px;left:52px;right:52px;display:flex;align-items:center;justify-content:space-between;font-size:9.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:9px}
+footer.f .pn{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:20px;border-radius:10px;background:var(--grad);color:#fff;font-weight:700;font-size:10px;padding:0 8px}
+
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:#C9361F;background:#FFE4D8;border:1px dashed #F5A98F;border-radius:20px;padding:0 8px;line-height:17px;white-space:nowrap;vertical-align:middle;margin-inline-start:4px}
+.badge::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--coral)}
+.on-red .badge{color:#fff;background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.55)}
+.on-red .badge::before{background:#fff}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;position:relative}
+.card.soft{background:var(--blush);border-color:transparent}
+.redcard{background:var(--grad);color:#fff;border-radius:24px;padding:24px;position:relative;overflow:hidden}
+.redcard::after{content:"";position:absolute;inset:0;background:url(img/waves.svg) center/cover;opacity:.13;pointer-events:none}
+.redcard>*{position:relative;z-index:1}
+.ico{width:46px;height:46px;border-radius:14px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -8px rgba(236,70,50,.7);flex:none}
+.ico svg{width:23px;height:23px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ico.lt{background:#FFE6DC;box-shadow:none}
+.ico.lt svg{stroke:var(--red)}
+.ico.wh{background:rgba(255,255,255,.2);box-shadow:none;border:1px solid rgba(255,255,255,.35)}
+.num{font-family:var(--sans);font-weight:900;font-size:13px;color:var(--red);letter-spacing:.06em}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;color:var(--red);background:#FFE6DC;border-radius:20px;padding:1px 12px}
+.on-red .tag,.tag.w{color:var(--red);background:#fff}
+.ct{font-size:17.5px;font-weight:700;color:var(--ink);line-height:1.45}
+.cd{font-size:13.2px;color:var(--muted);line-height:1.8;margin-top:6px}
+ul.dots{list-style:none}
+ul.dots li{position:relative;padding-inline-start:18px;margin:5px 0}
+ul.dots li::before{content:"";position:absolute;right:0;top:.72em;width:7px;height:7px;border-radius:50%;background:var(--grad)}
+.on-red ul.dots li::before{background:#fff}
+ul.checks{list-style:none}
+ul.checks li{position:relative;padding-inline-start:28px;margin:7px 0}
+ul.checks li::before{content:"";position:absolute;right:0;top:.28em;width:19px;height:19px;border-radius:50%;background:#FFE6DC url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EC4632' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/11px no-repeat}
+.on-red ul.checks li::before{background-color:#fff}
+.chev{display:flex;align-items:center;justify-content:center;width:30px;flex:none;color:var(--coral);font-size:30px;font-weight:300;line-height:1}
+.chev span{display:flex;width:28px;height:28px;border-radius:50%;background:#FFE6DC;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--red);padding-bottom:3px}
+
+/* photo slot: shows the photo if present, else a branded fallback */
+.photo{position:absolute;background-color:#F8C9B6;background-size:cover;background-position:center;overflow:hidden}
+.photo::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,122,89,.05),rgba(232,55,42,.28))}
+
+/* ---------- Divider / cover ---------- */
+.full-red{position:absolute;inset:0;background:var(--grad);color:#fff}
+.full-red::after{content:"";position:absolute;inset:0;background:url(img/waves.svg) center/cover;opacity:.15}
+.full-red>*{z-index:1}
+.ghost-num{position:absolute;font-family:var(--sans);font-weight:900;font-size:300px;line-height:1;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.28);z-index:1}
+
+/* ---------- tables ---------- */
+table.t{width:100%;border-collapse:separate;border-spacing:0;font-size:12px}
+table.t th{background:var(--grad);color:#fff;font-weight:700;text-align:right;padding:10px 14px;font-size:12.5px}
+table.t th:first-child{border-top-right-radius:16px}
+table.t th:last-child{border-top-left-radius:16px}
+table.t td{padding:8px 14px;border-bottom:1px solid var(--line);vertical-align:middle;line-height:1.6}
+table.t tr:nth-child(even) td{background:#FFFAF7}
+table.t tr:last-child td{border-bottom:0}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 8h8M8 12h5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8M16 17H8M10 9H8"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="3"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+  <symbol id="i-brief" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2 2.7 2.7 0 0 1-2-1 2.7 2.7 0 0 1-2 1 2.7 2.7 0 0 1-2-1 2.7 2.7 0 0 1-2 1 2.7 2.7 0 0 1-2-1 2.7 2.7 0 0 1-2 1 2.7 2.7 0 0 1-2-1 2.7 2.7 0 0 1-2 1 2 2 0 0 1-2-2V7"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"/><path d="m15 9 6-6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.2 6.6 6.8.4-5.3 4.3 1.8 6.7L12 16.7l-5.5 3.8 1.8-6.7L3 9.5l6.8-.4z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></symbol>
+</svg>
+
+<!-- ================= 1. COVER ================= -->
+<section class="page">
+  <div class="full-red"></div>
+  <div class="photo" style="left:0;top:0;bottom:0;width:430px;background-image:url(img/cover.jpg);border-top-right-radius:0;border-bottom-right-radius:220px;z-index:2"></div>
+  <div style="position:absolute;left:330px;bottom:56px;z-index:3;width:190px;height:190px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 30px 60px -20px rgba(120,20,10,.45)">
+    <img src="img/logo-dark.png" style="width:150px">
+  </div>
+  <div style="position:absolute;right:64px;top:56px;left:500px;z-index:3;color:#fff" class="on-red">
+    <img src="img/logo-light.png" style="width:250px;display:block;margin-right:-14px">
+    <div style="margin-top:70px;display:inline-block;font-size:11px;letter-spacing:.28em;font-weight:700;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.45);border-radius:30px;padding:4px 18px;direction:ltr">EXECUTIVE PROGRAM PROPOSAL</div>
+    <h1 style="font-family:var(--disp);font-weight:700;font-size:50px;line-height:1.3;margin-top:22px;white-space:nowrap">مهارات قيادية تُطبَّق في العمل،<br><span style="color:#FFE1CF">لا تبق<span class="sw">ى</span> في القاعة</span></h1>
+    <div style="width:70px;height:4px;border-radius:4px;background:#fff;margin:24px 0 20px;opacity:.9"></div>
+    <div style="font-size:21px;font-weight:700">برنامج الجاهزية القيادية والتطور المهني</div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:16px;font-size:14px;font-weight:700">
+      <span style="background:#fff;color:var(--red);border-radius:30px;padding:3px 18px">مسار الأفراد</span><span style="opacity:.8">·</span><span style="background:#fff;color:var(--red);border-radius:30px;padding:3px 18px">مسار المؤسسات</span>
+    </div>
+  </div>
+  <div style="position:absolute;right:64px;bottom:44px;z-index:3;color:#fff;font-size:13px;opacity:.92;display:flex;gap:12px;align-items:center">
+    <span>عرض البرنامج</span><span>·</span><span>بغداد</span><span>·</span><span>تشرين الثاني 2026</span>
+  </div>
+</section>
+
+<!-- ================= 2. AT A GLANCE ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner" style="display:grid;grid-template-columns:1.18fr .82fr;gap:34px;flex-direction:unset">
+    <div class="col">
+      <div class="eyebrow">Program at a glance</div>
+      <h2 class="h1">البرنامج ف<span class="sw">ي</span> صفحة واحدة</h2>
+      <p class="lead" style="margin-top:16px"><b class="en" style="color:var(--red)">LEADPRO</b> برنامج حضوري تطبيقي لتطوير الجاهزية القيادية والمهارات المهنية. يساعد الأفراد والمؤسسات على تحديد الاحتياجات التطويرية، وبناء قدرات عملية في التواصل والتأثير، وقيادة الفرق، والتفكير واتخاذ القرار، والتعامل مع التغيير.</p>
+      <div class="redcard" style="margin-top:22px;display:flex;gap:18px;align-items:center;padding:26px 28px">
+        <div class="ico wh" style="width:58px;height:58px;border-radius:18px"><svg style="width:28px;height:28px"><use href="#i-target"/></svg></div>
+        <div>
+          <span class="tag w">وعد البرنامج</span>
+          <div style="font-size:19px;font-weight:700;line-height:1.55;margin-top:8px">مهارات قيادية قابلة للتطبيق، تتحوّل في نهاية البرنامج إلى خطة عمل شخصية أو مؤسسية.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;margin-top:22px;align-items:flex-start">
+        <div style="width:4px;align-self:stretch;border-radius:4px;background:var(--grad)"></div>
+        <p class="lead" style="font-size:14px">نموذج واحد بهوية موحّدة، يُقدَّم عبر مسارين: <b style="color:var(--ink)">مسار للأفراد</b> الذين يستثمرون في تطوّرهم المهني، و<b style="color:var(--ink)">مسار للمؤسسات</b> التي تطوّر قياداتها وموظفيها.</p>
+      </div>
+      <div class="photo" style="position:relative;flex:1;margin-top:20px;border-radius:24px 24px 24px 90px;background-image:url(img/glance.jpg)"></div>
+    </div>
+    <div class="card soft" style="padding:26px 26px 16px;margin-top:84px;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div class="ico" style="width:36px;height:36px;border-radius:11px"><svg style="width:18px;height:18px"><use href="#i-layers"/></svg></div><div style="font-size:18px;font-weight:700">حقائق سريعة</div></div>
+      <div class="facts">
+        <div><span>الصيغة</span><b>حضوري تطبيقي</b></div>
+        <div><span>المدة</span><b>3 أيام، أو يومان مكثفان <i class="badge">تُثبَّت مع الإعلان</i></b></div>
+        <div><span>المكان</span><b>بغداد — الدفعة الأولى</b></div>
+        <div><span>المساران</span><b>الأفراد  ·  المؤسسات</b></div>
+        <div><span>المخرج الأساسي</span><b>خطة تطوير شخصية ومهمة تطبيقية</b></div>
+        <div><span>المتابعة</span><b>30 يوماً بعد التدريب <i class="badge">قيد الإعداد</i></b></div>
+        <div><span>الشهادة</span><b>شهادة تدريب مهني وفق شروط الإتمام <i class="badge">قيد التوثيق</i></b></div>
+      </div>
+    </div>
+  </div>
+  <style>.facts{flex:1;display:flex;flex-direction:column;justify-content:space-between}.facts>div{display:grid;grid-template-columns:100px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid #F7D8CB;font-size:13.5px;line-height:1.6}.facts>div:last-child{border:0}.facts span{color:var(--muted);font-size:11.5px}.facts b{font-weight:700}.facts i{font-style:normal}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">2</span></footer>
+</section>
+
+<!-- ================= 3. WHY IT MATTERS ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Why it matters</div>
+    <h2 class="h1">الانتقال إل<span class="sw">ى</span> القيادة لا يحدث تلقائياً</h2>
+    <div class="g" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px">
+      <div class="card stat"><div class="big">الثانية</div><div class="ct">ترتيب «القيادة» بين المهارات الأكثر نقصاً</div><div class="cd">بحسب أصحاب العمل في العراق، جاءت القيادة بعد الهندسة مباشرة، تليها إدارة المشاريع.</div><div class="src en">mselect · Iraq Employment Outlook 2025</div></div>
+      <div class="card stat"><div class="big en">67%</div><div class="ct">من أصحاب العمل كانوا يعتزمون تدريب موظفيهم</div><div class="cd">نسبة أصحاب العمل في الاستطلاع نفسه الذين خططوا لتوفير دورات لموظفيهم خلال 2025، بينما لم يُلحق نحو 32% منهم موظفيهم بأي تدريب في العام السابق.</div><div class="src en">mselect · Iraq Employment Outlook 2025</div></div>
+      <div class="card stat"><div class="big en">60%</div><div class="ct">تقريباً من المديرين الجدد لم يتلقوا أي تدريب</div><div class="cd">عند انتقالهم إلى أول دور قيادي، في دراسة دولية لمركز القيادة الإبداعية شملت 295 مديراً جديداً.</div><div class="src en">Center for Creative Leadership · 2014</div></div>
+    </div>
+    <div class="redcard" style="margin-top:20px;display:flex;gap:22px;align-items:center;padding:22px 28px">
+      <div style="flex:none;text-align:center"><div class="ico wh" style="width:54px;height:54px;border-radius:17px;margin:0 auto"><svg style="width:26px;height:26px"><use href="#i-star"/></svg></div><div style="font-weight:700;font-size:13px;margin-top:6px">الخلاصة</div></div>
+      <div style="width:1px;align-self:stretch;background:rgba(255,255,255,.4)"></div>
+      <div style="font-size:16px;line-height:1.75;font-weight:500">ما يحتاجه المشرف الجديد ليس محاضرة عامة عن القيادة، بل <b>أدوات عملية يجرّبها في مواقف قريبة من عمله، وخطة واضحة يعود بها إلى فريقه.</b> على هذه الفكرة بُني <b class="en">LEADPRO</b>.</div>
+    </div>
+    <div style="margin-top:14px;font-size:9.5px;color:var(--muted);line-height:1.7">
+      <b style="color:var(--red)">المصادر</b>  هذه الأرقام مؤشرات على احتياج عام للتدريب القيادي، ولا تقيس حجم الطلب على البرنامج نفسه.
+      <div class="en" style="direction:ltr;text-align:left">mselect, Iraq Employment Outlook 2025 — employer survey in Iraq, conducted Q1 2025 (mselect.com)<br>Gentry, Logan &amp; Tonidandel (2014), Understanding the Leadership Challenges of First-Time Managers, Center for Creative Leadership — international sample, 2012–2013</div>
+    </div>
+  </div>
+  <style>.stat{padding:26px 26px 20px;overflow:hidden;display:flex;flex-direction:column}.stat .src{margin-top:auto!important}.stat::before{content:"";position:absolute;top:0;right:22px;left:22px;height:4px;border-radius:0 0 4px 4px;background:var(--grad)}.stat .big{font-family:var(--disp);font-weight:900;font-size:64px;line-height:1.15;color:var(--red);margin-bottom:6px}.stat .big.en{font-family:var(--sans)}.stat .src{font-size:9.5px;color:var(--coral);font-weight:700;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);direction:ltr;text-align:right}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">3</span></footer>
+</section>
+
+<!-- ================= 4. APPROACH ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Our approach</div>
+    <h2 class="h1">من الاحتياج… إل<span class="sw">ى</span> التطبيق</h2>
+    <p class="lead" style="margin-top:6px;max-width:760px">لا يبدأ البرنامج بمحاضرة ولا ينتهي بانتهاء القاعة. أربع خطوات متصلة تربط ما يحتاجه المشارك فعلاً بما يطبّقه بعد التدريب.</p>
+    <div class="g" style="display:flex;align-items:stretch;margin-top:26px">
+      <div class="card step"><div class="sh"><div class="ico"><svg><use href="#i-search"/></svg></div><span class="n en">01</span></div><div class="ct">تحديد الاحتياج</div><div class="cd">استبيان احتياجات وتوقعات قبل التدريب، وتقييم ذاتي يساعد المشارك على تحديد هدفه.</div></div>
+      <div class="chev"><span>‹</span></div>
+      <div class="card step"><div class="sh"><div class="ico"><svg><use href="#i-users"/></svg></div><span class="n en">02</span></div><div class="ct">تدريب تطبيقي</div><div class="cd">تمارين وحالات عمل ومحاكاة ومناقشات موجّهة، قريبة من واقع العمل في العراق.</div></div>
+      <div class="chev"><span>‹</span></div>
+      <div class="card step"><div class="sh"><div class="ico"><svg><use href="#i-file"/></svg></div><span class="n en">03</span></div><div class="ct">خطة تطوير</div><div class="cd">يخرج كل مشارك بخطة تطوير من صفحة واحدة، ومهمة يطبّقها في عمله.</div></div>
+      <div class="chev"><span>‹</span></div>
+      <div class="card step"><div class="sh"><div class="ico"><svg><use href="#i-refresh"/></svg></div><span class="n en">04</span></div><div class="ct">متابعة قصيرة</div><div class="cd">متابعة إلكترونية لمدة 30 يوماً: رسالة أسبوعية ومهمة تطبيقية واحدة على الأقل.</div><div style="margin-top:8px"><i class="badge" style="font-style:normal;margin:0">قيد الإعداد</i></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px">
+      <div class="trk"><div class="ico lt"><svg><use href="#i-user"/></svg></div><div><div class="ct" style="color:var(--red)">في المسار الفردي</div><div class="cd" style="color:var(--ink2);font-size:12.5px">حالات متنوعة من بيئات عمل مختلفة، وخطة تطوير شخصية، وتسجيل ودفع فردي.</div></div></div>
+      <div class="trk"><div class="ico lt"><svg><use href="#i-building"/></svg></div><div><div class="ct" style="color:var(--red)">في المسار المؤسسي</div><div class="cd" style="color:var(--ink2);font-size:12.5px">أمثلة من قطاع المؤسسة، وأهداف تعلّم متفق عليها، وملخص جماعي للاحتياجات دون كشف بيانات شخصية.</div></div></div>
+    </div>
+  </div>
+  <style>.step{flex:1;padding:26px 22px;display:flex;flex-direction:column}.step .sh{margin-bottom:auto!important;padding-bottom:30px}.step .sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.step .n{font-weight:900;font-size:52px;color:#FFD9CB;line-height:1}.trk{display:flex;gap:16px;align-items:center;background:var(--grad-soft);border-radius:22px;padding:24px 26px;border-right:5px solid var(--red)}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">4</span></footer>
+</section>
+
+<!-- ================= 5. CURRICULUM ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">The curriculum</div>
+    <h2 class="h1">خمسة محاور… ومحصّلة واحدة</h2>
+    <div class="g" style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:28px">
+      <div class="card ax"><div class="ico"><svg><use href="#i-user"/></svg></div><div class="n en">01</div><div class="ct">الوعي بالذات والعقلية القيادية</div><div class="cd">فهم نقاط القوة ومجالات النمو، والانتقال من عقلية المنفّذ إلى عقلية القائد.</div></div>
+      <div class="card ax"><div class="ico"><svg><use href="#i-msg"/></svg></div><div class="n en">02</div><div class="ct">التواصل والتأثير</div><div class="cd">الإصغاء، والتغذية الراجعة، وإدارة الحوار بما يعزّز التأثير في الآخرين.</div></div>
+      <div class="card ax"><div class="ico"><svg><use href="#i-users"/></svg></div><div class="n en">03</div><div class="ct">قيادة الفريق والتفويض والتحفيز</div><div class="cd">توزيع العمل والتفويض، والتعامل مع مشكلات الأداء داخل الفريق.</div></div>
+      <div class="card ax"><div class="ico"><svg><use href="#i-route"/></svg></div><div class="n en">04</div><div class="ct">التفكير وحل المشكلات واتخاذ القرار</div><div class="cd">تحليل المشكلة، ووزن البدائل والمخاطر، والوصول إلى قرار واضح.</div></div>
+      <div class="card ax"><div class="ico"><svg><use href="#i-refresh"/></svg></div><div class="n en">05</div><div class="ct">التخطيط والأولويات والتغيير</div><div class="cd">ترتيب الأولويات، والتعامل مع مقاومة التغيير، وتحويل الأهداف إلى خطة.</div></div>
+    </div>
+    <div class="redcard" style="margin-top:26px;display:flex;align-items:center;gap:24px;padding:24px 30px">
+      <div class="ico wh" style="width:60px;height:60px;border-radius:19px"><svg style="width:28px;height:28px"><use href="#i-layers"/></svg></div>
+      <div>
+        <div style="display:flex;align-items:center;gap:12px"><span class="tag w">المحصّلة</span><span style="font-size:21px;font-weight:700">دمج التعلّم في خطة تطوير شخصية</span></div>
+        <div style="font-size:14px;margin-top:6px;opacity:.95">في الجلسة الأخيرة يعرض كل مشارك خطته ويراجعها مع المدرّب والمجموعة، لتتحوّل المحاور الخمسة إلى خطوات عمل خلال 30 يوماً.</div>
+      </div>
+    </div>
+  </div>
+  <style>.ax{padding:24px 20px 22px;display:flex;flex-direction:column}.ax .n{margin-top:auto!important;padding-top:20px}.ax .n{font-weight:900;font-size:13px;color:var(--coral);margin:16px 0 4px;letter-spacing:.1em}.ax .ct{font-size:17px}.ax:nth-child(odd){background:var(--blush);border-color:transparent}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">5</span></footer>
+</section>
+
+<!-- ================= 6. JOURNEY ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Program journey</div>
+    <h2 class="h1">ثلاثة أيام… ومخرج ف<span class="sw">ي</span> نهاية كل جلسة</h2>
+    <div class="g" style="margin-top:22px;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex">
+    <table style="height:100%" class="t jr">
+      <thead><tr><th style="width:130px;text-align:center">اليوم</th><th style="width:270px">المحور</th><th>ماذا نطبّق</th><th style="width:230px">ماذا يخرج به المشارك</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="2" class="day d1"><span style="position:relative;z-index:2">اليوم الأول</span></td><td class="ax2">الوعي بالذات والعقلية القيادية</td><td>تحليل موقف مهني، وتحديد نقاط القوة والاحتياج</td><td class="out"><span>•</span> هدف تطوير شخصي</td></tr>
+        <tr><td class="ax2">التواصل والتأثير</td><td>الإصغاء، والتغذية الراجعة، وإدارة الحوار</td><td class="out"><span>•</span> خطة لتحسين التواصل</td></tr>
+        <tr><td rowspan="2" class="day d2"><span style="position:relative;z-index:2">اليوم الثاني</span></td><td class="ax2">قيادة الفريق والتفويض والتحفيز</td><td>محاكاة موقف فريق ومشكلة أداء</td><td class="out"><span>•</span> خطوات عملية لإدارة الفريق</td></tr>
+        <tr><td class="ax2">التفكير وحل المشكلات واتخاذ القرار</td><td>حالة قرار ببدائل ومخاطر</td><td class="out"><span>•</span> نموذج قرار مختصر</td></tr>
+        <tr><td rowspan="2" class="day d3"><span style="position:relative;z-index:2">اليوم الثالث</span></td><td class="ax2">التخطيط والأولويات والتغيير</td><td>ترتيب الأولويات، والتعامل مع مقاومة التغيير</td><td class="out"><span>•</span> خطة تطبيق في العمل</td></tr>
+        <tr><td class="ax2">دمج التعلّم وخطة التطوير</td><td>عرض خطة كل مشارك ومراجعتها</td><td class="out"><span>•</span> خطة 30 يوماً</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:flex-start;font-size:11.5px;color:var(--muted)"><div class="ico lt" style="width:26px;height:26px;border-radius:8px"><svg style="width:14px;height:14px"><use href="#i-info"/></svg></div><div><b style="color:var(--red)">صيغة اليومين:</b> تُدمج بعض الموضوعات بعد مراجعة المحتوى، مع الحفاظ على المخرجات الأساسية. يُعلن الجدول التفصيلي مع كل دفعة.</div></div>
+  </div>
+  <style>.jr td{font-size:14px;padding:12px 18px}.jr .day{background:#fff!important;font-weight:700;color:#fff;text-align:center;padding:8px}.jr .day{position:relative}.jr .day::before{content:"";position:absolute;inset:6px;border-radius:14px;background:var(--grad);z-index:0}.jr .d2::before{background:linear-gradient(135deg,#F2513A,#FF8A5B)}.jr .d3::before{background:linear-gradient(135deg,#FF7E58,#FFA477)}.jr .day{color:#fff}.jr .day>*{position:relative}.jr .ax2{font-weight:700;color:var(--ink)}.jr .out{font-weight:700;color:var(--red)}.jr .out span{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--coral);color:transparent;overflow:hidden;line-height:8px;margin-left:6px;vertical-align:middle}</style>
+  <style>.jr td.day{font-size:13.5px}.jr td.day{z-index:0}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">6</span></footer>
+</section>
+
+<!-- ================= 7. TAKEAWAYS ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">What participants take away</div>
+    <h2 class="h1">ما الذي يخرج به المشار<span class="sw">ك</span>؟</h2>
+    <div class="g" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px">
+      <div class="card tk"><div class="ico"><svg><use href="#i-flag"/></svg></div><div><div class="ct">هدف تطوير محدّد</div><div class="cd">هدف قيادي أو مهني شخصي، واضح وقابل للمتابعة.</div></div></div>
+      <div class="card tk"><div class="ico"><svg><use href="#i-msg"/></svg></div><div><div class="ct">أدوات للتواصل وقيادة الفريق</div><div class="cd">أدوات عملية للتواصل والتأثير والتغذية الراجعة وإدارة الفريق.</div></div></div>
+      <div class="card tk"><div class="ico"><svg><use href="#i-route"/></svg></div><div><div class="ct">منهج مبسّط للقرار</div><div class="cd">طريقة عملية لتحليل المشكلات واتخاذ القرار وترتيب الأولويات.</div></div></div>
+      <div class="card tk"><div class="ico"><svg><use href="#i-file"/></svg></div><div><div class="ct">خطة تطوير من صفحة واحدة</div><div class="cd">خطة شخصية مكتوبة، يراجعها المشارك مع المدرّب قبل نهاية البرنامج.</div></div></div>
+      <div class="card tk"><div class="ico"><svg><use href="#i-check"/></svg></div><div><div class="ct">مهمة تطبيقية</div><div class="cd">مهمة ينفّذها المشارك في عمله بعد التدريب، لنقل المهارة إلى الواقع.</div></div></div>
+      <div class="redcard tk on-red"><div class="ico wh"><svg><use href="#i-award"/></svg></div><div><div class="ct" style="color:#fff">شهادة تدريب مهني</div><div class="cd" style="color:#fff;opacity:.92">للمشارك الذي يستوفي شروط الحضور والإتمام.</div><div style="margin-top:10px;font-size:11px;font-weight:700">الجهة المصدِرة <i class="badge" style="font-style:normal">قيد التوثيق</i></div></div></div>
+    </div>
+  </div>
+  <style>.tk{display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:28px 26px}.tk .ct{font-size:19px}.tk .cd{font-size:13.5px}.tk .ico{width:54px;height:54px;border-radius:17px}.tk .ico svg{width:26px;height:26px}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">7</span></footer>
+</section>
+
+<!-- ================= 8. INDIVIDUAL DIVIDER ================= -->
+<section class="page">
+  <div class="full-red"></div>
+  <div class="photo" style="left:0;top:0;bottom:0;width:470px;background-image:url(img/individual.jpg);border-top-right-radius:240px;z-index:2"></div>
+  <div class="ghost-num en" style="left:400px;bottom:-60px">01</div>
+  <div class="on-red" style="position:absolute;right:70px;top:0;bottom:0;left:540px;z-index:3;color:#fff;display:flex;flex-direction:column;justify-content:center">
+    <img src="img/logo-light.png" style="position:absolute;top:50px;right:-12px;width:170px">
+    <div style="font-size:11px;letter-spacing:.3em;font-weight:700;direction:ltr;text-align:right;opacity:.9">INDIVIDUAL TRACK</div>
+    <div style="font-size:20px;font-weight:700;margin-top:8px;color:#FFE1CF">المسار الأول</div>
+    <div style="font-family:var(--disp);font-weight:900;font-size:112px;line-height:1.1;margin-top:-4px">الأفراد</div>
+    <div style="margin-top:20px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:24px;padding:20px 26px;position:relative">
+      <div style="position:absolute;top:-26px;right:22px;font-family:var(--disp);font-size:80px;line-height:1;color:#fff;opacity:.9">”</div>
+      <div style="font-size:23px;font-weight:700;line-height:1.6">«لا تنتظر أن تُمنح مسؤولية قيادية<br>حت<span class="sw">ى</span> تبدأ الاستعداد لها.»</div>
+    </div>
+    <div style="font-size:15px;margin-top:20px;line-height:1.8;opacity:.95;max-width:460px">طوّر مهاراتك، وافهم نقاط قوتك ومجالات نموّك، واستعد لخطوتك المهنية التالية.</div>
+  </div>
+</section>
+
+<!-- ================= 9. WHO IT'S FOR ================= -->
+<section class="page">
+  
+  <div class="inner" style="display:grid;grid-template-columns:1.5fr 1fr;gap:26px">
+    <div class="col">
+      <div class="eyebrow">Individual track · Who it's for</div>
+      <h2 class="h1">لم<span class="sw">ن</span> صُمّم هذا المسار؟</h2>
+      <div class="g" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+        <div class="card ps"><div class="ico"><svg><use href="#i-brief"/></svg></div><div class="ct">الموظف الطموح</div><div class="cd">خبرة من سنتين إلى ثماني سنوات، ويستعد للترقية أو للانتقال إلى دور إشرافي.</div></div>
+        <div class="card ps soft"><div class="ico"><svg><use href="#i-users"/></svg></div><div class="ct">المشرف أو قائد الفريق الجديد</div><div class="cd">تسلّم مسؤولية فريق، ويريد إدارته بثقة: تواصلاً وتفويضاً ومتابعةً للأداء.</div></div>
+        <div class="card ps soft"><div class="ico"><svg><use href="#i-up"/></svg></div><div class="ct">المرشّح لدور قيادي</div><div class="cd">يعرف أن دوراً قيادياً قادم، ويريد سدّ فجوة المهارات قبل أن يتولّاه.</div></div>
+        <div class="card ps"><div class="ico"><svg><use href="#i-store"/></svg></div><div class="ct">صاحب المشروع الصغير أو المتوسط</div><div class="cd">يحتاج قرارات أوضح، وإدارة أفضل للأشخاص والأولويات.</div></div>
+      </div>
+    </div>
+    <div class="redcard on-red" style="padding:34px 30px;display:flex;flex-direction:column">
+      <img src="img/logo-light.png" style="position:absolute;top:30px;left:28px;width:120px">
+      <div class="ico wh" style="width:52px;height:52px;border-radius:16px"><svg style="width:26px;height:26px"><use href="#i-target"/></svg></div>
+      <span class="tag w" style="align-self:flex-start;margin-top:16px">المشكلة التي يعالجها</span>
+      <div style="font-size:19px;font-weight:700;line-height:1.7;margin-top:14px;margin-bottom:20px">يصل كثيرون إلى أول دور قيادي بخبرة فنية جيدة، لكن دون إعداد لما يتغيّر فعلاً:</div>
+      <ul class="dots" style="margin-top:auto;font-size:15px;line-height:1.9">
+        <li>قيادة زملاء الأمس.</li>
+        <li>التفويض بدل أن تنجز كل شيء بنفسك.</li>
+        <li>الحوار الصعب حول الأداء.</li>
+        <li>اتخاذ القرار وترتيب الأولويات تحت الضغط.</li>
+      </ul>
+    </div>
+  </div>
+  <style>.ps{padding:24px;display:flex;flex-direction:column}.ps .ct{margin-top:auto;padding-top:16px;font-size:18px}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">9</span></footer>
+</section>
+
+<!-- ================= 10. WHAT YOU GAIN ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Individual track · What you gain</div>
+    <h2 class="h1">ماذا ستتعلّم، وبماذا تخرج؟</h2>
+    <div class="g" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px">
+      <div class="card gn"><div class="hd"><div class="ico"><svg><use href="#i-search"/></svg></div><div class="ct">ستتعلّم</div></div>
+        <ul class="dots"><li>كيف تفهم نقاط قوتك ومجالات نموّك.</li><li>كيف تتواصل وتؤثّر وتقدّم تغذية راجعة.</li><li>كيف تفوّض وتحفّز فريقك.</li><li>كيف تحلّل المشكلة وتتخذ القرار.</li><li>كيف ترتّب أولوياتك وتتعامل مع التغيير.</li></ul></div>
+      <div class="card gn soft"><div class="hd"><div class="ico"><svg><use href="#i-wrench"/></svg></div><div class="ct">ستطوّر</div></div>
+        <ul class="dots"><li>الإصغاء وإدارة الحوار.</li><li>تقديم التغذية الراجعة.</li><li>التفويض والمتابعة.</li><li>تحليل البدائل والمخاطر.</li><li>التخطيط وترتيب الأولويات.</li></ul></div>
+      <div class="card gn"><div class="hd"><div class="ico"><svg><use href="#i-box"/></svg></div><div class="ct">ستخرج بـ</div></div>
+        <ul class="dots"><li>هدف تطوير محدّد.</li><li>خطة تطوير من صفحة واحدة.</li><li>مهمة تطبيقية في عملك.</li><li>متابعة لمدة 30 يوماً <i class="badge" style="font-style:normal">قيد الإعداد</i></li><li>شهادة تدريب مهني <i class="badge" style="font-style:normal">قيد التوثيق</i></li></ul></div>
+    </div>
+    <div class="redcard" style="margin-top:20px;display:flex;align-items:center;gap:20px;padding:22px 28px">
+      <div class="ico wh" style="width:50px;height:50px;border-radius:16px"><svg><use href="#i-star"/></svg></div>
+      <div><div style="font-size:12px;font-weight:700;opacity:.9">لماذا يستحق وقتك ومالك؟</div><div style="font-size:16px;font-weight:700;line-height:1.65;margin-top:2px">لأنك تخرج بأدوات جرّبتها على مواقف قريبة من عملك، وبخطة مكتوبة تعرف منها خطوتك التالية؛ لا بشهادة حضور فقط.</div></div>
+    </div>
+  </div>
+  <style>.gn{padding:24px 26px}.gn .hd{display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:6px;border-bottom:1px dashed var(--line)}.gn .ct{font-size:19px}.gn{display:flex;flex-direction:column}.gn ul{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;font-size:14.5px;color:var(--ink2)}.gn li{margin:4px 0}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">10</span></footer>
+</section>
+
+<!-- ================= 11. IS IT FOR YOU ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Individual track · Is it for you</div>
+    <h2 class="h1">هل البرنامج مناسب ل<span class="sw">ك</span>؟</h2>
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:22px">
+      <div class="card soft" style="padding:24px 28px">
+        <div class="ct" style="font-size:18px;color:var(--red)">البرنامج مناسب لك إذا:</div>
+        <ul class="checks" style="font-size:14px;margin-top:8px"><li>لديك هدف مهني تريد الوصول إليه خلال 6 إلى 18 شهراً.</li><li>تستطيع حضور البرنامج كاملاً، وتنفيذ مهمة تطبيقية بعده.</li><li>تبحث عن مهارة تستخدمها، لا عن شهادة شكلية فقط.</li></ul>
+        <div style="margin-top:10px;font-size:11.5px;color:var(--muted);background:#fff;border-radius:14px;padding:10px 14px;line-height:1.7">قد لا يناسبك الآن إذا كنت حديث التخرج دون خبرة عملية أو هدف وظيفي قريب؛ فالبرنامج مبني على مواقف العمل الفعلية.</div>
+      </div>
+      <div class="redcard on-red" style="padding:24px 28px">
+        <div style="display:flex;align-items:center;gap:10px"><div class="ico wh" style="width:36px;height:36px;border-radius:11px"><svg style="width:18px;height:18px"><use href="#i-shield"/></svg></div><div class="ct" style="color:#fff;font-size:17px">التزاماتنا بوضوح</div></div>
+        <ul class="dots" style="font-size:14px;margin-top:12px;line-height:1.85"><li>نعلن المدة والمواعيد والرسوم وشروط الشهادة قبل التسجيل.</li><li>لا نعد بترقية أو زيادة راتب أو وظيفة بعد البرنامج.</li><li>لا نصف المشاركين بأنهم «قادة معتمدون» بمجرد الحضور.</li><li>أدوات التقييم تدريبية، ولا تصدر عنها تقارير تصنّف الأشخاص.</li></ul>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:22px"><div style="font-size:19px;font-weight:700">كيف تسجّل؟</div><div style="flex:1;height:1px;background:var(--line)"></div></div>
+    <div class="g" style="display:flex;align-items:stretch;margin-top:14px">
+      <div class="card rg"><div class="rn en">1</div><div><div class="ct">سجّل اهتمامك</div><div class="cd">عبر نموذج الاهتمام أو وسائل التواصل في آخر هذا العرض.</div></div></div>
+      <div class="chev"><span>‹</span></div>
+      <div class="card rg"><div class="rn en">2</div><div><div class="ct">نتواصل معك</div><div class="cd">بتفاصيل الدفعة: الموعد والمكان والرسوم وشروط الشهادة.</div></div></div>
+      <div class="chev"><span>‹</span></div>
+      <div class="card rg"><div class="rn en">3</div><div><div class="ct">ثبّت مقعدك</div><div class="cd">يُثبَّت المقعد بعد دفع العربون أو الرسوم وفق سياسة مكتوبة.</div></div></div>
+    </div>
+  </div>
+  <style>.rg{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:14px;padding:22px 24px}.rg .rn{width:46px!important;height:46px!important;font-size:20px!important}.rg .rn{flex:none;width:38px;height:38px;border-radius:50%;background:var(--grad);color:#fff;font-weight:900;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 16px -8px rgba(236,70,50,.8)}.rg .cd{margin-top:2px}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">11</span></footer>
+</section>
+
+<!-- ================= 12. CORPORATE DIVIDER ================= -->
+<section class="page">
+  <div class="full-red"></div>
+  <div class="photo" style="left:0;top:0;bottom:0;width:470px;background-image:url(img/corporate.jpg);border-bottom-right-radius:240px;z-index:2"></div>
+  <div class="ghost-num en" style="left:400px;bottom:-60px">02</div>
+  <div class="on-red" style="position:absolute;right:70px;top:0;bottom:0;left:540px;z-index:3;color:#fff;display:flex;flex-direction:column;justify-content:center">
+    <img src="img/logo-light.png" style="position:absolute;top:50px;right:-12px;width:170px">
+    <div style="font-size:11px;letter-spacing:.3em;font-weight:700;direction:ltr;text-align:right;opacity:.9">CORPORATE TRACK</div>
+    <div style="font-size:20px;font-weight:700;margin-top:8px;color:#FFE1CF">المسار الثاني</div>
+    <div style="font-family:var(--disp);font-weight:900;font-size:104px;line-height:1.1;margin-top:-4px">المؤسسا<span class="sw">ت</span></div>
+    <div style="margin-top:22px;font-size:22px;font-weight:700;line-height:1.65">طوّروا جاهزية مشرفيكم والمرشحين لأدوار قيادية،<br><span style="background:#fff;color:var(--red);border-radius:10px;padding:0 10px;box-decoration-break:clone;-webkit-box-decoration-break:clone">بتدريب تطبيقي يرتبط باحتياجات بيئة عملكم.</span></div>
+    <div style="font-size:14.5px;margin-top:20px;line-height:1.8;opacity:.95;max-width:470px">لإدارات الموارد البشرية، والتعلّم والتطوير، والإدارات التنفيذية في القطاعين العام والخاص.</div>
+  </div>
+</section>
+
+<!-- ================= 13. CORPORATE VALUE ================= -->
+<section class="page">
+  
+  <div class="inner" style="display:grid;grid-template-columns:1.55fr 1fr;gap:26px">
+    <div class="col">
+      <div class="eyebrow">Corporate track · Value</div>
+      <h2 class="h1" style="font-size:34px">ما القيمة التي يقدّمها <span class="en hl" style="font-weight:900">LEADPRO</span> لمؤسستك<span class="sw">م</span>؟</h2>
+      <div class="g" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px">
+        <div class="card ps"><div class="ico"><svg><use href="#i-chart"/></svg></div><div class="ct">إعداد مبكر للقيادة</div><div class="cd">تجهيز المشرفين الجدد والمرشحين للقيادة قبل أن تظهر الفجوة في أداء فرقهم.</div></div>
+        <div class="card ps soft"><div class="ico"><svg><use href="#i-building"/></svg></div><div class="ct">تدريب مرتبط بواقعكم</div><div class="cd">أمثلة وحالات من قطاع مؤسستكم، وأهداف تعلّم يُتفق عليها مسبقاً.</div></div>
+        <div class="card ps soft"><div class="ico"><svg><use href="#i-search"/></svg></div><div class="ct">صورة أوضح عن الاحتياج</div><div class="cd">ملخص تجميعي للاحتياجات التدريبية للفئة المشاركة، دون كشف بيانات فردية.</div></div>
+        <div class="card ps"><div class="ico"><svg><use href="#i-check"/></svg></div><div class="ct">تعلّم يتحوّل إلى تطبيق</div><div class="cd">خطة تطوير لكل مشارك، ومهمة تطبيقية داخل بيئة العمل.</div></div>
+      </div>
+    </div>
+    <div class="redcard on-red" style="padding:34px 30px;display:flex;flex-direction:column">
+      <img src="img/logo-light.png" style="position:absolute;top:30px;left:28px;width:120px">
+      <div class="ico wh" style="width:52px;height:52px;border-radius:16px"><svg style="width:26px;height:26px"><use href="#i-users"/></svg></div>
+      <div style="font-size:22px;font-weight:700;margin-top:16px">لمن داخل المؤسسة؟</div>
+      <ul class="dots" style="margin-top:14px;font-size:16px;line-height:2"><li>المشرفون الجدد.</li><li>قادة الفرق.</li><li>الموظفون المرشّحون لأدوار قيادية.</li><li>رؤساء الأقسام، بحسب الاحتياج.</li></ul>
+      <div style="margin-top:auto;font-size:12px;line-height:1.7;background:rgba(255,255,255,.15);border-radius:14px;padding:12px 14px">يُحدَّد ذلك في اجتماع الاحتياج مع إدارة الموارد البشرية أو التعلّم والتطوير.</div>
+    </div>
+  </div>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">13</span></footer>
+</section>
+
+<!-- ================= 14. HOW WE WORK ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Corporate track · How we work with you</div>
+    <h2 class="h1">كيف نعمل معك<span class="sw">م</span>؟</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px">
+      <div class="card soft op"><div class="ico"><svg><use href="#i-users"/></svg></div><div><span class="tag">الخيار الأول</span><div class="ct" style="margin-top:6px">ترشيح موظفين في دفعة عامة</div><div class="cd">مقاعد لموظفيكم ضمن دفعة مفتوحة، مناسبة لعدد محدود من المرشّحين.</div></div></div>
+      <div class="card soft op"><div class="ico"><svg><use href="#i-building"/></svg></div><div><span class="tag">الخيار الثاني</span><div class="ct" style="margin-top:6px">برنامج مخصّص لمؤسستكم</div><div class="cd">دفعة خاصة بموظفيكم، تُكيَّف أمثلتها وحالاتها وأهدافها وفق احتياجكم.</div></div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:20px"><div style="font-size:18px;font-weight:700">مراحل التعاون</div><div style="flex:1;height:1px;background:var(--line)"></div></div>
+    <div class="g" style="display:flex;align-items:stretch;margin-top:12px">
+      <div class="card stg"><span class="n en">01</span><div class="ct">اجتماع تحديد الاحتياج</div><div class="cd">نتعرّف على الفئة المستهدفة، والمهارات المطلوب تطويرها، والمخرجات المتوقعة.</div></div>
+      <div class="chev"><span>‹</span></div>
+      <div class="card stg"><span class="n en">02</span><div class="ct">عرض فني ومالي</div><div class="cd">عرض يحدّد الصيغة والمدة والمحاور والمخرجات المتفق عليها.</div></div>
+      <div class="chev"><span>‹</span></div>
+      <div class="card stg"><span class="n en">03</span><div class="ct">تنفيذ البرنامج</div><div class="cd">تدريب تطبيقي بحالات من قطاعكم، وخطة تطوير لكل مشارك.</div></div>
+      <div class="chev"><span>‹</span></div>
+      <div class="card stg"><span class="n en">04</span><div class="ct">ملخص وتوصيات</div><div class="cd">ملخص تجميعي للاحتياجات وتوصيات عامة للمؤسسة، دون بيانات فردية.</div></div>
+    </div>
+    <div class="redcard" style="margin-top:18px;display:flex;align-items:center;gap:16px;padding:18px 24px">
+      <div class="ico wh" style="width:40px;height:40px;border-radius:13px"><svg style="width:20px;height:20px"><use href="#i-lock"/></svg></div>
+      <div><b style="font-size:13.5px">خصوصية المشاركين</b><div style="font-size:12.5px;opacity:.95">لا تُستخدم مخرجات البرنامج لتصنيف الموظفين أو في قرارات التوظيف والترقية، وتُجمع بيانات المشاركين بموافقتهم.</div></div>
+    </div>
+  </div>
+  <style>.op{display:flex;gap:16px;align-items:flex-start;padding:22px 24px}.stg{flex:1;padding:20px 18px;display:flex;flex-direction:column}.stg .ct{margin-top:auto}.stg .n{align-self:flex-start;display:inline-flex;font-weight:900;font-size:12px;color:#fff;background:var(--grad);border-radius:20px;padding:1px 10px;margin-bottom:8px}.stg .ct{font-size:16px}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">14</span></footer>
+</section>
+
+<!-- ================= 15. DELIVERABLES ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Corporate track · Deliverables</div>
+    <h2 class="h1">ما الذ<span class="sw">ي</span> تحصل عليه المؤسسة؟</h2>
+    <div class="g" style="margin-top:22px;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex">
+    <table style="height:100%" class="t dl">
+      <thead><tr><th style="width:250px">المخرج</th><th>ما يتضمّنه</th><th style="width:210px">المستفيد</th></tr></thead>
+      <tbody>
+        <tr><td class="o"><i></i>أهداف تعلّم متفق عليها</td><td>تُحدَّد في اجتماع الاحتياج قبل التنفيذ.</td><td><span class="bn">الإدارة / الموارد البشرية</span></td></tr>
+        <tr><td class="o"><i></i>حالات من قطاعكم</td><td>أمثلة وتمارين مستمدّة من بيئة عملكم.</td><td><span class="bn p">المشاركون</span></td></tr>
+        <tr><td class="o"><i></i>خطط تطوير فردية</td><td>خطة من صفحة واحدة ومهمة تطبيقية لكل مشارك.</td><td><span class="bn p">المشاركون</span></td></tr>
+        <tr><td class="o"><i></i>ملخص تجميعي للاحتياجات</td><td>صورة عامة عن احتياجات الفئة المشاركة، دون بيانات فردية، وبموافقة المشاركين.</td><td><span class="bn">الإدارة / الموارد البشرية</span></td></tr>
+        <tr><td class="o"><i></i>توصيات عامة</td><td>توصيات تطويرية للمؤسسة مبنية على الملخص التجميعي.</td><td><span class="bn">الإدارة</span></td></tr>
+        <tr><td class="o"><i></i>شهادات للمشاركين</td><td>للمستوفين شروط الحضور والإتمام. <i class="badge" style="font-style:normal">قيد التوثيق</i></td><td><span class="bn p">المشاركون</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <style>.dl td{font-size:14.5px;padding:12px 22px;color:var(--ink2)}.dl .o{font-weight:700;color:var(--ink);font-size:15.5px}.dl .o i{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--grad);margin-left:10px;vertical-align:middle;transform:rotate(45deg)}.bn{display:inline-block;font-size:12.5px;font-weight:700;color:#fff;background:var(--grad);border-radius:20px;padding:2px 14px}.bn.p{background:#FFE6DC;color:var(--red)}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">15</span></footer>
+</section>
+
+<!-- ================= 16. WHY LEADPRO ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Why LEADPRO</div>
+    <h2 class="h1">لماذا <span class="en hl" style="font-weight:900">LEADPRO</span>؟</h2>
+    <div class="g" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px">
+      <div class="card wy"><div class="ico"><svg><use href="#i-route"/></svg></div><div><div class="ct">تطبيق لا محاضرات</div><div class="cd">تمارين وحالات ومحاكاة في كل محور، لا عرض نظري فقط.</div></div></div>
+      <div class="card wy soft"><div class="ico"><svg><use href="#i-pin"/></svg></div><div><div class="ct">سياق عراقي</div><div class="cd">حالات وأمثلة قريبة من واقع بيئة العمل في العراق.</div></div></div>
+      <div class="card wy"><div class="ico"><svg><use href="#i-box"/></svg></div><div><div class="ct">مخرجات ملموسة</div><div class="cd">خطة تطوير ومهمة تطبيقية لكل مشارك.</div></div></div>
+      <div class="card wy soft"><div class="ico"><svg><use href="#i-split"/></svg></div><div><div class="ct">مساران بخطاب مختلف</div><div class="cd">مسار يخاطب الفرد وتطوّره، ومسار يخاطب المؤسسة واحتياجاتها.</div></div></div>
+      <div class="card wy"><div class="ico"><svg><use href="#i-shield"/></svg></div><div><div class="ct">تقييم مسؤول</div><div class="cd">أدوات احتياج وتقييم ذاتي تدريبية، دون تشخيص نفسي أو تصنيف للأشخاص.</div></div></div>
+      <div class="card wy soft"><div class="ico"><svg><use href="#i-clock"/></svg></div><div><div class="ct">صيغة مركّزة</div><div class="cd">ثلاثة أيام حضورية أو يومان مكثفان، تجمع الاحتياج والتدريب وخطة التطبيق.</div></div></div>
+    </div>
+    <div style="margin-top:22px;text-align:center;font-size:18px;font-weight:700;color:var(--ink);background:var(--grad-soft);border-radius:40px;padding:18px 24px">لا ينافس <span class="en" style="color:var(--red)">LEADPRO</span> بطول البرنامج أو عدد موضوعاته، بل <span style="color:var(--red)">بربط الاحتياج بالتدريب بخطة التطبيق.</span></div>
+  </div>
+  <style>.wy{display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:26px 24px}.wy .ct{font-size:19px}.wy .cd{font-size:13.8px}.wy .ico{width:54px;height:54px;border-radius:17px}.wy .ico svg{width:26px;height:26px}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">16</span></footer>
+</section>
+
+<!-- ================= 17. ASSESSMENT ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Assessment &amp; Certificate</div>
+    <h2 class="h1">الشفافية جزء م<span class="sw">ن</span> الجودة</h2>
+    <div class="g" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px">
+      <div class="card soft" style="padding:28px 30px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:12px"><div class="ico"><svg><use href="#i-check"/></svg></div><div class="ct" style="font-size:18px">أدوات التقييم في الدفعة الأولى</div></div>
+        <ul class="checks" style="font-size:14.5px;margin-top:16px;line-height:1.9"><li>استبيان احتياجات وتوقعات قبل التدريب.</li><li>تقييم ذاتي انعكاسي للمهارات.</li><li>تقييم بعدي لرضا المشاركين ومدى إدراكهم للتعلّم.</li><li>مهمة تطبيقية بعد التدريب، تُتابَع بصورة وصفية.</li></ul>
+        <div style="margin-top:auto;font-size:12.5px;color:var(--muted);background:#fff;border-radius:14px;padding:14px 16px;line-height:1.8">أدوات تدريبية، لا اختبارات نفسية أو تشخيصية، ولا تصدر عنها تقارير فردية تصنّف المشاركين. ولا تُستخدم أي أداة قياس إضافية قبل التحقق من صلاحيتها وحقوق استخدامها.</div>
+      </div>
+      <div class="redcard on-red" style="padding:28px 30px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:12px"><div class="ico wh"><svg><use href="#i-award"/></svg></div><div class="ct" style="font-size:18px;color:#fff">الشهادة</div></div>
+        <div style="font-size:15px;margin-top:14px;line-height:1.75">يحصل المشارك الذي يستوفي متطلبات الحضور والإتمام على شهادة تدريب مهني.</div>
+        <div class="cf">
+          <div><span>الجهة المصدِرة</span><b>[ تُضاف بعد اكتمال التوثيق ]</b></div>
+          <div><span>التحقق</span><b>[ رابط التحقق الرسمي من رقم الشهادة ]</b></div>
+          <div><span>نوع الشهادة</span><b>[ مشاركة أو إتمام برنامج تدريبي ]</b></div>
+        </div>
+        <div style="margin-top:14px;font-size:12.5px;opacity:.92">شهادة تدريب مهني لتطوير المهارات، وليست شهادة أكاديمية ولا تعادل درجة جامعية.</div>
+      </div>
+    </div>
+  </div>
+  <style>.cf{margin-top:auto;background:#fff;border-radius:16px;padding:4px 16px;color:var(--ink)}.cf>div{display:grid;grid-template-columns:110px 1fr;gap:10px;padding:13px 0;border-bottom:1px dashed var(--line);font-size:13.5px}.cf>div:last-child{border:0}.cf span{color:var(--muted)}.cf b{color:var(--red)}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">17</span></footer>
+</section>
+
+<!-- ================= 18. TEAM & COHORT ================= -->
+<section class="page">
+  <div class="corner"><img src="img/logo-light.png"></div>
+  <div class="inner">
+    <div class="eyebrow">Team &amp; First cohort</div>
+    <h2 class="h1">فريق البرنامج ومعلومات الدفعة الأول<span class="sw">ى</span></h2>
+    <div class="g" style="display:grid;grid-template-columns:.95fr 1.05fr;gap:20px;margin-top:22px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="redcard on-red" style="padding:26px 28px;flex:1;display:flex;flex-direction:column;justify-content:center">
+          <div style="display:flex;gap:16px;align-items:center">
+            <div style="width:68px;height:68px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none"><svg style="width:32px;height:32px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round"><use href="#i-user"/></svg></div>
+            <div><div style="font-size:11.5px;opacity:.9;font-weight:500">صاحب البرنامج والمدير الاستشاري</div><div style="font-family:var(--disp);font-size:26px;font-weight:700;line-height:1.35">د. حازم العبيدي</div></div>
+          </div>
+          <div style="font-size:14.5px;margin-top:14px">يعتمد رؤية البرنامج ومحتواه، ويختار المدرّبين وأدوات التدريب.</div>
+          <div style="margin-top:10px;font-size:11.5px;background:rgba(255,255,255,.16);border:1px dashed rgba(255,255,255,.6);border-radius:12px;padding:7px 12px;font-weight:700">[ نبذة مهنية مختصرة عن د. حازم العبيدي: الخبرة والتخصص ]</div>
+        </div>
+        <div class="card soft" style="padding:24px 26px;display:flex;gap:14px;align-items:center">
+          <div class="ico"><svg><use href="#i-users"/></svg></div>
+          <div><div class="ct">المدرّبون</div><div style="font-size:12px;color:var(--red);font-weight:700;margin-top:2px">[ أسماء المدرّبين وخبراتهم ومحاورهم ]</div></div>
+        </div>
+      </div>
+      <div class="card" style="padding:22px 26px 14px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px"><span class="tag" style="font-size:12px">الدفعة الأولى — بغداد</span></div>
+        <div class="ch">
+          <div><span class="ico lt"><svg><use href="#i-pin"/></svg></span><em>المكان</em><b>بغداد  [ القاعة ]</b></div>
+          <div><span class="ico lt"><svg><use href="#i-cal"/></svg></span><em>الموعد</em><b>[ يُعلن لاحقاً ]</b></div>
+          <div><span class="ico lt"><svg><use href="#i-clock"/></svg></span><em>المدة</em><b>3 أيام حضورية، أو يومان مكثفان</b></div>
+          <div><span class="ico lt"><svg><use href="#i-wallet"/></svg></span><em>رسوم الأفراد</em><b>[ تُعلن قبل فتح التسجيل ]</b></div>
+          <div><span class="ico lt"><svg><use href="#i-building"/></svg></span><em>المؤسسات</em><b>عرض فني ومالي بحسب صيغة التعاون</b></div>
+          <div><span class="ico lt"><svg><use href="#i-check"/></svg></span><em>تأكيد المقعد</em><b>بعد دفع العربون أو الرسوم وفق سياسة مكتوبة</b></div>
+          <div><span class="ico lt"><svg><use href="#i-undo"/></svg></span><em>الإلغاء والاسترداد</em><b>سياسة مكتوبة تُعلن قبل التحصيل</b></div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;padding-top:8px;border-top:1px dashed var(--line)">ملء نموذج الاهتمام لا يعني حجزاً مؤكداً.</div>
+      </div>
+    </div>
+  </div>
+  <style>.ch{flex:1;display:flex;flex-direction:column;justify-content:space-around}.ch>div{display:grid;grid-template-columns:32px 118px 1fr;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid #FBEAE3;font-size:13.5px}.ch>div:last-child{border:0}.ch .ico{width:30px;height:30px;border-radius:9px}.ch .ico svg{width:15px;height:15px}.ch em{font-style:normal;color:var(--muted);font-size:11.5px}.ch b{font-weight:700}</style>
+  <footer class="f"><span><b class="en" style="color:var(--red)">LEADPRO</b>  ·  برنامج الجاهزية القيادية والتطور المهني  ·  عرض البرنامج</span><span class="pn">18</span></footer>
+</section>
+
+<!-- ================= 19. CONTACT ================= -->
+<section class="page">
+  <div class="full-red"></div>
+  <div class="photo" style="left:0;top:0;bottom:0;width:400px;background-image:url(img/contact.jpg);border-top-right-radius:200px;z-index:2"></div>
+  <div class="on-red" style="position:absolute;right:64px;top:48px;bottom:44px;left:460px;z-index:3;color:#fff;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <div style="font-size:11px;letter-spacing:.3em;font-weight:700;direction:ltr;text-align:right;opacity:.9">GET IN TOUCH</div>
+        <div style="font-family:var(--disp);font-weight:900;font-size:62px;line-height:1.2;margin-top:2px">لنبدأ الحدي<span class="sw">ث</span></div>
+      </div>
+      <img src="img/logo-light.png" style="width:190px;margin-left:-14px">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px">
+      <div class="cta"><div class="ico"><svg><use href="#i-user"/></svg></div><span class="tag">للأفراد</span><div class="ct" style="margin-top:8px">سجّل اهتمامك بالدفعة الأولى</div><div class="cd">نتواصل معك بالموعد والرسوم وشروط الشهادة قبل التسجيل.</div></div>
+      <div class="cta"><div class="ico"><svg><use href="#i-building"/></svg></div><span class="tag">للمؤسسات</span><div class="ct" style="margin-top:8px">احجزوا اجتماعاً لتحديد الاحتياج</div><div class="cd">نناقش الفئة المستهدفة والمخرجات، ثم نرسل عرضاً فنياً ومالياً.</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:20px;font-size:13.5px">
+      <div class="cl"><span><svg><use href="#i-phone"/></svg></span><b class="en">07715278907  ·  07867969678</b></div>
+      <div class="cl"><span><svg><use href="#i-mail"/></svg></span><b class="en">insr.net@gmail.com</b></div>
+      <div class="cl"><span><svg><use href="#i-globe"/></svg></span><b>[ الموقع الإلكتروني ]</b></div>
+      <div class="cl"><span><svg><use href="#i-pin"/></svg></span><b>[ العنوان في بغداد ]</b></div>
+    </div>
+    <div style="margin-top:auto;display:flex;align-items:center;gap:16px">
+      <div style="width:5px;align-self:stretch;border-radius:5px;background:#fff"></div>
+      <div style="font-family:var(--disp);font-size:24px;font-weight:700;line-height:1.5">معاً نحو قيادات أكثر كفاءة<br><span style="color:#FFE1CF">ومؤسسا<span class="sw">ت</span> أكثر تميّزاً</span></div>
+    </div>
+  </div>
+  <style>.cta{background:#fff;color:var(--ink);border-radius:22px;padding:18px 20px;position:relative;box-shadow:0 20px 40px -24px rgba(120,20,10,.6)}.cta .ico{position:absolute;left:18px;top:18px;width:40px;height:40px;border-radius:13px}.cta .ico svg{width:20px;height:20px}.cl{display:flex;align-items:center;gap:10px}.cl span{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;flex:none}.cl svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.cl b{font-weight:700}</style>
+</section>
+
+</body>
+</html>
